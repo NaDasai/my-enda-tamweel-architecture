@@ -133,29 +133,6 @@ Client Hedera private keys require special security handling:
 |Service mesh authentication (mTLS)
 |===
 
-=== Rate Limiting
-
-[cols="1,2,2", options="header"]
-|===
-|Endpoint Category |Rate Limit |Window
-
-|Authentication
-|5 requests
-|1 minute
-
-|Token Refresh
-|10 requests
-|1 minute
-
-|API General
-|100 requests
-|1 minute
-
-|Admin Operations
-|50 requests
-|1 minute
-|===
-
 == Role-Based Access Control (RBAC)
 
 === Role Hierarchy

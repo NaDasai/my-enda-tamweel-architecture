@@ -337,14 +337,6 @@ endif
 |All health checks pass
 |===
 
-=== Deployment Success Criteria
-
-* All pods reach `Ready` state within 5 minutes
-* Health check endpoints return 200 OK
-* No error spike in monitoring (>1% error rate triggers rollback)
-* Database migrations complete successfully
-* Hedera connectivity verified
-
 == Secrets Management
 
 === Secret Categories

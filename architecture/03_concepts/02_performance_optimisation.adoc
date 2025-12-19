@@ -34,7 +34,7 @@ title Batch Minting Strategy
 
 start
 :Collect mint requests;
-:Group by transaction batch (max 100);
+:Group by transaction batch (max 50);
 
 while (More batches?) is (yes)
     :Submit batch to Hedera;
@@ -192,23 +192,4 @@ workers --> queue : Retry failed jobs
 * **Auto Token Association**: Tokens auto-associated during account creation
 * **Transaction Batching**: Multiple operations combined where possible
 * **Testnet vs Mainnet**: Development uses testnet to minimize costs
-
-=== Network Monitoring
-
-[cols="1,2", options="header"]
-|===
-|Metric |Threshold
-
-|Transaction success rate
-|>99%
-
-|Average consensus time
-|<5 seconds
-
-|Daily transaction count
-|Monitor for anomalies
-
-|Fee spend (HBAR)
-|Budget alerting
-|===
 

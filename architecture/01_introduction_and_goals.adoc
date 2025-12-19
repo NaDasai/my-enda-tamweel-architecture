@@ -23,3 +23,8 @@ Key capabilities include:
 * Secure JWT-based authentication with token rotation
 // end::manager[]
 
+[NOTE]
+====
+This document is subject to change based on ongoing discussions with Enda Tamweel management. Use cases and features may be added or removed in response to their feedback and business needs.
+====
+
