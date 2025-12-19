@@ -1,0 +1,23 @@
+// tag::developer[]
+= Quality Goals
+
+////
+[NOTE]
+how will quality be measured in this project, also referred as Non-Functional requirements
+////
+
+
+[cols="1,3,8", id=quality-goals, options="header"]
+|===
+|ID |Quality |Description
+
+|[[Q1]]Q1 |Security |Private keys encrypted at rest; JWT tokens with short expiry; refresh tokens stored hashed in DB; HTTPS-only communication; HTTP-only secure cookies for refresh tokens
+|[[Q2]]Q2 |Reliability |Daily batch processing must complete successfully; reconciliation between DB and on-chain balances; comprehensive audit logging
+|[[Q3]]Q3 |Performance |API responses optimized for large user bases
+|[[Q4]]Q4 |Scalability |Asynchronous job queue for daily point calculations; batch mint operations to handle growing client base
+|[[Q5]]Q5 |Availability |System available during business hours with scheduled maintenance windows for batch operations
+|[[Q6]]Q6 |Maintainability |Clean separation between business logic and Hedera integration; comprehensive logging for troubleshooting
+|[[Q7]]Q7 |Auditability |Complete audit trail for all token minting, burning, and redemption operations; login/logout event logging
+|[[Q8]]Q8 |Data Integrity |Regular reconciliation between application database and on-chain token balances
+|===
+// end::developer[]

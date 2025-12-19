@@ -1,0 +1,99 @@
+= System Context
+
+== Overview
+
+This diagram shows the systems that are communicating and interacting within the scope of the Enda Tamweel Loyalty Tokenization Platform.
+
+== Context Diagram
+// tag::architect[]
+[plantuml, format=png]
+----
+
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+title System Context diagram for Enda Tamweel Loyalty Platform
+
+Enterprise_Boundary(c0, "Enda Tamweel") {
+Person(client, "Client", "Enda Tamweel customer who earns and redeems loyalty points")
+Person(admin, "Admin", "Enda Tamweel employee who manages gifts and approves redemptions")
+Person(superadmin, "Super Admin", "Manages Admin accounts and views audit logs")
+
+System(platform, "Loyalty Platform", "Web and Mobile applications for clients, admins, and super admins to interact with the loyalty system")
+System(backend, "Backend Service", "SpringBoot backend that processes points, manages tokens, and exposes APIs")
+
+System_Ext(middledb, "Middle DB", "Consolidated database from T24 and Works systems, updated daily (J-1)")
+}
+
+System_Ext(hedera, "Hedera Hashgraph", "Distributed ledger network providing HTS for token management and account services")
+
+Rel(client, platform, "Views balance, requests gift redemption")
+Rel(admin, platform, "Manages gifts, approves/rejects redemptions")
+Rel(superadmin, platform, "Manages Admin accounts, views audit logs")
+Rel(platform, backend, "REST API calls")
+Rel(backend, middledb, "Reads client activity data (daily)")
+Rel(backend, hedera, "Creates accounts, mints/burns tokens")
+
+@enduml
+
+----
+
+// end::architect[]
+
+== Key Elements
+
+=== Client
+Enda Tamweel customers who participate in the loyalty program. Clients can:
+
+* View their current loyalty point balance
+* Browse available gifts in the catalog
+* Request gift redemptions
+* Track their redemption history
+
+=== Admin
+Enda Tamweel employees responsible for managing the loyalty program. Admins can:
+
+* View and manage the gift catalog
+* Review and approve/reject client redemption requests
+* View client transaction history
+
+=== Super Admin
+Senior administrators with elevated privileges. Super Admins can:
+
+* Create, modify, and deactivate Admin accounts
+* View comprehensive audit logs
+
+=== Loyalty Platform (Frontend)
+The user-facing applications built with React (Web) and React Native (Mobile). The frontend provides:
+
+* Responsive web application for desktop and tablet users
+* Native mobile applications for iOS and Android
+* Role-based interfaces for Clients, Admins, and Super Admins
+* Real-time balance display and transaction history
+
+=== Backend Service
+The core SpringBoot application that orchestrates all platform operations:
+
+* Fetches and processes data from Middle DB
+* Calculates daily points based on business rules
+* Manages Hedera account creation and token operations
+* Exposes secure REST APIs for all frontend operations
+* Handles authentication and authorization
+
+=== Middle DB (External)
+Enda Tamweel's consolidated database that aggregates data from:
+
+* T24 core banking system
+* Works operational system
+
+Updated daily with J-1 data cycle. The platform has read-only access for extracting client activity information.
+
+=== Hedera Hashgraph (External)
+The distributed ledger network providing:
+
+* Hedera Token Service (HTS) for the loyalty token
+* Account creation for each registered client
+* Immutable transaction records for minting and burning operations
+

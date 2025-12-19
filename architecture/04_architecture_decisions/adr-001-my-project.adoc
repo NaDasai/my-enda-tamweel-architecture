@@ -1,0 +1,46 @@
+= ADR 001: Use Hedera Token Service (HTS) for Loyalty Points Tokenization
+
+*Status*: Proposed
+
+*Date*: December 2025
+
+*Context*:
+Enda Tamweel requires a loyalty points system that provides:
+
+* Transparent and immutable record of point balances
+* Ability to mint and burn tokens based on business rules
+* Low transaction costs for frequent operations
+* Integration with existing banking systems
+
+Alternative approaches considered:
+
+1. **Traditional Database Only**: Store points in PostgreSQL without blockchain
+2. **Hedera Token Service (HTS)**: Use Hedera's native tokenization service
+
+*Decision:*
+We will use **Hedera Token Service (HTS)** for tokenizing loyalty points.
+
+Rationale:
+
+* **Native Tokenization**: HTS provides built-in token functionality without custom smart contracts
+* **Low Fees**: Predictable, low-cost transactions ($0.001 or less per operation)
+* **Fast Finality**: 3-5 second consensus time for all transactions
+* **Enterprise Grade**: Governed by major enterprises, suitable for financial applications
+* **Built-in Controls**: Native support for minting, burning, and admin keys
+* **Compliance**: Transaction fees in USD-equivalent, easy for accounting
+* **SDK Support**: Official JavaScript SDK integrates well with SpringBoot backend
+
+*Consequences*:
+
+Positive:
+
+* Transparent, auditable record of all token operations on public ledger
+* No smart contract vulnerabilities to manage
+* Low operational costs compared to Ethereum
+* Fast transaction confirmation for good user experience
+
+Negative:
+
+* Dependency on Hedera network availability
+* On-chain data is public (mitigated by not storing PII on-chain)
+* Requires HBAR for transaction fees

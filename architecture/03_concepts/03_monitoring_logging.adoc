@@ -1,0 +1,33 @@
+= Monitoring and Logging
+
+This section describes the monitoring, logging, and observability architecture for the Enda Tamweel Loyalty Platform.
+
+== Logging Architecture
+
+=== Log Levels and Usage
+
+[cols="1,2,3", options="header"]
+|===
+|Level |Usage |Examples
+
+|ERROR
+|System failures requiring immediate attention
+|Database connection failure, Hedera transaction failure, unhandled exceptions
+
+|WARN
+|Potential issues that don't prevent operation
+|Retry attempts, degraded performance, cache misses
+
+|INFO
+|Normal operational events
+|User login, token minting, redemption approval
+
+|DEBUG
+|Detailed information for troubleshooting
+|Request/response payloads, calculation steps
+
+|TRACE
+|Very detailed debugging information
+|Function entry/exit, variable values
+|===
+

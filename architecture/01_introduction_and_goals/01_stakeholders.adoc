@@ -1,0 +1,15 @@
+= Stakeholders
+
+[cols="1,2,3", id=stakeholders, options="header"]
+|===
+|Role |Contact |Expectations
+
+|Enda Tamweel Management |Enda Tamweel Team |Successful loyalty program that increases client engagement and retention
+|Product Owner |Dar Blockchain Team |Feature completeness and seamless integration with existing T24/Works systems
+|Project Manager |Dar Blockchain Team |On-time delivery within budget with clear milestone tracking
+|Tech Lead |Dar Blockchain Team |Code quality, Hedera integration, and technical implementation
+|Backend Developers |Dar Blockchain Team |Clear API specifications and maintainable codebase
+|Frontend Developers |Dar Blockchain Team |Intuitive UI/UX for clients and administrators
+|System Administrators |Enda Tamweel IT |Easy deployment, monitoring, and maintenance
+|Clients (End Users) |Enda Tamweel Customers |Easy access to loyalty points, transparent balance tracking, and simple gift redemption
+|===

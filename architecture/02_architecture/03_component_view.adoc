@@ -1,0 +1,135 @@
+= Component Diagram
+
+== Overview
+
+This document provides a component-level view (C3) of the Enda Tamweel Loyalty Platform, detailing the internal structure of the backend service and its interactions with external systems.
+
+== [[components]] Component Diagram - Backend Service
+
+The Backend Service is the core of the platform, handling all business logic, data processing, and blockchain interactions.
+
+[plantuml, format=png]
+----
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Container_Ext(webApp, "Web Application", "React frontend")
+Container_Ext(mobileApp, "Mobile Application", "React Native")
+
+System_Boundary(backend, "Backend Service (SpringBoot)") {
+Component(authModule, "Auth Module", "Handles JWT authentication, token refresh, and session management")
+Component(userModule, "User Module", "Manages client registration and profile management")
+Component(walletModule, "Wallet Module", "Creates and manages Hedera accounts and encrypted key storage")
+Component(pointsEngine, "Points Engine", "Calculates daily points based on Middle DB data and business rules")
+Component(tokenModule, "Token Module", "Handles HTS token minting and burning operations")
+Component(giftModule, "Gift Module", "Manages gift catalog and redemption workflow")
+Component(adminModule, "Admin Module", "Admin and Super Admin management functions")
+Component(syncService, "Data Sync Service", "Scheduled jobs for Middle DB data extraction")
+Component(auditModule, "Audit Module", "Logs all significant operations for compliance")
+}
+
+ContainerDb_Ext(appDb, "Application DB", "PostgreSQL")
+Container_Ext(middleDb, "Middle DB", "T24/Works consolidated data")
+Container_Ext(hedera, "Hedera Network", "HTS and Account Service")
+
+Rel(webApp, authModule, "Authenticates via")
+Rel(mobileApp, authModule, "Authenticates via")
+Rel(webApp, userModule, "User operations")
+Rel(webApp, giftModule, "Gift operations")
+Rel(webApp, adminModule, "Admin operations")
+
+Rel(authModule, appDb, "Stores sessions/tokens")
+Rel(userModule, walletModule, "Creates wallet on registration")
+Rel(walletModule, hedera, "Creates Hedera accounts")
+Rel(walletModule, appDb, "Stores encrypted keys")
+
+Rel(syncService, middleDb, "Reads client data daily")
+Rel(syncService, pointsEngine, "Triggers calculation")
+Rel(pointsEngine, appDb, "Stores points history")
+Rel(pointsEngine, tokenModule, "Triggers minting")
+Rel(tokenModule, hedera, "Mints/burns tokens")
+
+Rel(giftModule, tokenModule, "Burns tokens on redemption")
+Rel(giftModule, appDb, "Stores redemption records")
+
+Rel(adminModule, appDb, "Manages admin accounts")
+Rel(auditModule, appDb, "Writes audit logs")
+
+@enduml
+----
+
+=== Auth Module
+Handles all authentication and authorization:
+
+* Login with username/password validation
+* JWT access token generation (short-lived, stored in memory only on client)
+* Refresh token generation (long-lived, HTTP-only secure cookie)
+* Token rotation on refresh (invalidate old, issue new)
+* Session management and logout
+* Role-based access control (Client, Admin, Super Admin)
+* Phone number verification during registration and password reset
+
+=== User Module
+Manages client user accounts:
+
+* Client registration with automatic Hedera wallet creation
+* Profile management and updates
+* Password management
+* Account status tracking
+
+=== Wallet Module
+Handles Hedera account operations:
+
+* Creates new Hedera accounts for registered clients
+* Generates and securely stores encrypted private keys
+* Manages account associations with the loyalty token
+* Provides signing capabilities for token operations
+
+=== Points Engine
+Core business logic for loyalty points:
+
+* Processes daily data extracted from Middle DB
+* Applies configurable business rules to calculate points
+* Stores daily snapshots and cumulative point values
+* Triggers token minting for calculated points
+
+=== Token Module
+Manages all HTS token operations:
+
+* Mints loyalty tokens to client Hedera accounts
+* Burns tokens when gifts are redeemed
+* Maintains reconciliation between database and on-chain balances
+* Uses platform admin key for all mint/burn operations
+
+=== Gift Module
+Manages the gift redemption workflow:
+
+* Gift catalog CRUD operations
+* Redemption request creation and tracking
+* Admin approval/rejection workflow
+* Triggers token burning on approved redemptions
+* Logs all redemption transactions
+
+=== Admin Module
+Administrative functions:
+
+* Admin account CRUD for Super Admins
+* Admin role and permission management
+* System configuration management
+
+=== Data Sync Service
+Scheduled data synchronization:
+
+* Nightly cron job for Middle DB data extraction
+* Read-only access to Middle DB
+* Logging for each import session
+* Error handling and retry logic
+
+=== Audit Module
+Compliance and audit logging:
+
+* Logs all authentication events (login, logout, refresh)
+* Logs all token operations (mint, burn)
+* Logs all redemption transactions
+* Logs admin actions
+* Provides audit trail query interface

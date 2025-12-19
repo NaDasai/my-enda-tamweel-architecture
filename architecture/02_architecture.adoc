@@ -1,0 +1,30 @@
+= Architecture
+
+// tag::architect[]
+== Technical Constraints
+
+- Must integrate with Hedera Token Service (HTS) for token minting and burning
+- Must integrate with Enda Tamweel's existing Middle DB (read-only access)
+- Must support secure storage of client Hedera private keys
+- Must implement JWT-based authentication with secure refresh token handling
+- Daily batch processing must align with Middle DB J-1 update cycle
+- Token operations must be performed by platform-controlled admin keys only
+// end::architect[]
+
+// tag::manager[]
+== Organizational Constraints
+- Integration with existing Enda Tamweel T24 and Works systems
+- Must align with Enda Tamweel's security and compliance requirements
+- Development by Dar Blockchain Team with defined delivery timeline
+// end::manager[]
+
+// tag::developer[]
+== Conventions
+- Backend developed using SpringBoot framework
+- Frontend using React (Web) and React Native (Mobile)
+- PostgreSQL for application database
+- RESTful API design principles
+- Comprehensive logging and audit trails
+- Asynchronous job processing for batch operations
+// end::developer[]
+

@@ -1,0 +1,59 @@
+= Technical Debt
+
+The following technical debt items represent known deficiencies in the current system implementation.
+They are acknowledged and planned for future resolution:
+
+[cols="1,1,4,4", id=Technical-Debt, options="header"]
+|===
+|ID |Severity |Description |Remediation
+
+|[[TD1]]TD1
+|High
+|Hedera operator credentials stored in environment variables rather than secure vault
+|Migrate to HashiCorp Vault or cloud KMS for all sensitive credentials
+
+|[[TD2]]TD2
+|Medium
+|Limited automated test coverage for Hedera integration layer
+|Add comprehensive integration tests using Hedera Testnet; mock SDK for unit tests
+
+|[[TD3]]TD3
+|Medium
+|Points calculation rules hardcoded in service; no admin interface for rule management
+|Implement rule engine with database-driven configuration; add admin UI for rule management
+
+|[[TD4]]TD4
+|Low
+|Batch processing does not support partial failure recovery from exact failure point
+|Implement fine-grained checkpointing; store progress per client; resume from exact failure point
+
+|[[TD5]]TD5
+|Medium
+|No rate limiting on internal service-to-service communication
+|Implement service mesh with rate limiting; add circuit breakers between services
+
+|[[TD6]]TD6
+|Low
+|Audit log query performance degrades with large datasets
+|Implement log partitioning; add time-based indexes; consider moving to time-series database
+
+|[[TD7]]TD7
+|Medium
+|Mobile app stores JWT access token in secure storage instead of memory
+|Refactor mobile auth to use memory-only storage with background refresh
+
+|[[TD8]]TD8
+|Low
+|API documentation not automatically generated from code annotations
+|Integrate Swagger/OpenAPI generation from SpringBoot decorators; publish to developer portal
+
+|[[TD9]]TD9
+|Medium
+|No automated backup verification for encrypted private keys
+|Implement automated backup restore testing; verify key decryption from backups monthly
+
+|[[TD10]]TD10
+|Low
+|Frontend components not fully accessible (WCAG compliance)
+|Conduct accessibility audit; implement ARIA labels; keyboard navigation support
+|===

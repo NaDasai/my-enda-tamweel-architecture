@@ -1,0 +1,115 @@
+= Container View
+
+== Overview
+
+This diagram shows the container images and their interactions within the Enda Tamweel Loyalty Tokenization Platform.
+
+// tag::developer[]
+== Container Diagram
+[plantuml, format=png]
+----
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Container diagram for Enda Tamweel Loyalty Platform
+
+Enterprise_Boundary(c0, "Enda Tamweel") {
+Person(client, "Client", "Views balance, redeems gifts")
+Person(admin, "Admin", "Manages gifts, approves redemptions")
+Person(superadmin, "Super Admin", "Manages admins, views audit logs")
+
+System_Boundary(application, "Loyalty Platform") {
+    Container(webApp, "Web Application", "React", "Web interface for clients, admins, and super admins")
+    Container(mobileApp, "Mobile Application", "React Native", "Native mobile app for iOS and Android")
+    Container(backend, "Backend Service", "SpringBoot", "Core API handling points calculation, token operations, and user management")
+    Container(jobQueue, "Job Queue", "Bull/Redis", "Asynchronous processing for daily batch operations")
+    ContainerDb(appDb, "Application Database", "PostgreSQL", "Stores users, points history, redemptions, and admin data")
+}
+
+System_Ext(middleDb, "Middle DB", "Consolidated T24/Works data, updated daily J-1")
+}
+
+System_Ext(hedera, "Hedera Network", "HTS token management, account creation")
+
+Rel(client, webApp, "Uses", "HTTPS")
+Rel(client, mobileApp, "Uses", "HTTPS")
+Rel(admin, webApp, "Uses", "HTTPS")
+Rel(superadmin, webApp, "Uses", "HTTPS")
+Rel(webApp, backend, "REST API calls", "JSON/HTTPS")
+Rel(mobileApp, backend, "REST API calls", "JSON/HTTPS")
+Rel(backend, appDb, "Reads/Writes", "SQL/TCP")
+Rel(backend, jobQueue, "Queues jobs", "Redis protocol")
+Rel(jobQueue, backend, "Triggers batch processing")
+Rel(backend, middleDb, "Reads client data", "SQL/TCP (read-only)")
+Rel(backend, hedera, "Account creation, mint/burn tokens", "Hedera SDK")
+
+@enduml
+
+----
+
+// end::developer[]
+
+== Description of Containers
+
+=== Web Application
+
+Built with React, the web application provides:
+
+* Responsive design for desktop and tablet browsers
+* Role-based dashboards (Client, Admin, Super Admin)
+* Real-time balance display
+* Gift catalog and redemption workflow
+* Admin management interface for Super Admins
+
+Key design choices:
+
+* JWT access tokens stored in memory only (not localStorage) to prevent XSS attacks
+* Refresh tokens handled via HTTP-only secure cookies
+* Modern React patterns with hooks and context
+
+=== Mobile Application
+
+Built with React Native for cross-platform deployment:
+
+* Native iOS and Android applications
+* Shared codebase with platform-specific optimizations
+* Push notifications for redemption status updates
+* Offline-capable balance caching
+
+=== Backend Service
+
+The core SpringBoot application responsible for:
+
+* **User Management**: Registration, authentication, Hedera wallet creation
+* **Points Engine**: Daily calculation based on Middle DB data
+* **Token Operations**: Minting loyalty tokens to user accounts, burning on redemption
+* **Gift Management**: Catalog CRUD, redemption workflow
+* **Admin Management**: Admin lifecycle for Super Admins
+
+Key design choices:
+
+* Modular SpringBoot architecture for separation of concerns
+* Hedera SDK integration for all blockchain operations
+* Encrypted private key storage for user wallets
+* Comprehensive audit logging
+
+=== Job Queue
+
+Asynchronous job processing using Bull with Redis:
+
+* Daily scheduled jobs for Middle DB data extraction
+* Batch points calculation processing
+* Batch token transfers to user accounts
+* Retry logic for failed Hedera transactions
+
+=== Application Database
+
+PostgreSQL database storing:
+
+* User accounts and encrypted wallet credentials
+* Points calculation history (daily snapshots and cumulative values)
+* Gift catalog and redemption requests
+* Admin and Super Admin accounts
+* Audit logs for all significant operations

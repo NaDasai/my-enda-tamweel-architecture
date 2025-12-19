@@ -1,0 +1,25 @@
+= Introduction and Goals
+
+////
+[NOTE]
+====
+This section provides a high-level overview of the project goals and key requirements. Keep it concise and business-focused.
+====
+////
+
+// tag::manager[]
+== Executive Summary
+The Enda Tamweel HTS-Based Loyalty Tokenization Platform is a loyalty and client fidelization system that manages client points using traditional databases combined with Hedera Hashgraph's HTS (Hedera Token Service). Points are tokenized as mintable and burnable HTS tokens that reflect the points accumulated by each client.
+
+The platform integrates Enda Tamweel's existing T24 and Works systems through an intermediate consolidated database (Middle DB), updated daily (J-1). Based on extracted data, daily points are calculated for each client, stored in the application database, and reflected in their on-chain token balances.
+
+Key capabilities include:
+
+* Automatic Hedera account creation for each registered client
+* Daily points calculation based on client activity from the Middle DB
+* Automatic minting of HTS loyalty tokens to client accounts
+* Gift redemption workflow with admin approval and token burning
+* Multi-tier role management (Client, Admin, Super Admin)
+* Secure JWT-based authentication with token rotation
+// end::manager[]
+
