@@ -3397,18 +3397,6 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>Unresolved directive in architecture.adoc - include::architecture/04_architecture_decisions/adr-002-backend-framework.adoc[]</p>
-</div>
-<div class="paragraph">
-<p>Unresolved directive in architecture.adoc - include::architecture/04_architecture_decisions/adr-003-authentication-strategy.adoc[]</p>
-</div>
-<div class="paragraph">
-<p>Unresolved directive in architecture.adoc - include::architecture/04_architecture_decisions/adr-004-custodial-wallet.adoc[]</p>
-</div>
-<div class="paragraph">
-<p>Unresolved directive in architecture.adoc - include::architecture/04_architecture_decisions/adr-005-batch-processing.adoc[]</p>
-</div>
 </div>
 </div>
 </div>
@@ -4173,7 +4161,7 @@ They are acknowledged and planned for future resolution:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>User Authentication</strong>: Secure login with JWT tokens and refresh token rotation, protecting user sessions with HTTP-only cookies and in-memory access tokens.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./01_introduction_and_goals/02_requirements_overview.html#RE7">R7 - JWT Auth</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./01_introduction_and_goals/03_quality_goals.html#Q1">Q1 - Security</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./04_architecture_decisions/adr-003-authentication-strategy.html">ADR-003 Auth Strategy</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Auth Strategy</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./06_risks_and_tech_debt/02_technical_debts.html#TD7">TD7 - Mobile Token Storage</a></p></td>
 </tr>
 <tr>
@@ -4181,7 +4169,7 @@ They are acknowledged and planned for future resolution:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>User Registration</strong>: New client onboarding with automatic Hedera wallet creation and secure key storage.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./01_introduction_and_goals/02_requirements_overview.html#RE1">R1 - Wallet Creation</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./01_introduction_and_goals/03_quality_goals.html#Q1">Q1 - Security</a>, <a href="./01_introduction_and_goals/03_quality_goals.html#Q6">Q6 - Maintainability</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./04_architecture_decisions/adr-004-custodial-wallet.html">ADR-004 Custodial Wallet</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Custodial Wallet</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./06_risks_and_tech_debt/01_risks.html#RI2">R2 - Key Compromise</a></p></td>
 </tr>
 <tr>
@@ -4189,7 +4177,7 @@ They are acknowledged and planned for future resolution:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Daily Points Calculation</strong>: Automated daily extraction from Middle DB and rule-based points calculation.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./01_introduction_and_goals/02_requirements_overview.html#RE2">R2 - Daily Extraction</a>, <a href="./01_introduction_and_goals/02_requirements_overview.html#RE3">R3 - Points Engine</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./01_introduction_and_goals/03_quality_goals.html#Q2">Q2 - Reliability</a>, <a href="./01_introduction_and_goals/03_quality_goals.html#Q4">Q4 - Scalability</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./04_architecture_decisions/adr-005-batch-processing.html">ADR-005 Batch Processing</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Batch Processing</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./06_risks_and_tech_debt/01_risks.html#RI3">R3 - Middle DB Integration</a>, <a href="./06_risks_and_tech_debt/02_technical_debts.html#TD3">TD3 - Hardcoded Rules</a></p></td>
 </tr>
 <tr>
@@ -4213,7 +4201,7 @@ They are acknowledged and planned for future resolution:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Admin Management</strong>: Super Admin panel for Admin account lifecycle management.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./01_introduction_and_goals/02_requirements_overview.html#RE6">R6 - Super Admin Panel</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./01_introduction_and_goals/03_quality_goals.html#Q1">Q1 - Security</a>, <a href="./01_introduction_and_goals/03_quality_goals.html#Q7">Q7 - Auditability</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./04_architecture_decisions/adr-003-authentication-strategy.html">ADR-003 Auth Strategy</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Auth Strategy</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">N/A</p></td>
 </tr>
 <tr>
@@ -4256,7 +4244,7 @@ They are acknowledged and planned for future resolution:</p>
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2025-12-19 13:57:16 UTC
+Last updated 2025-12-19 14:09:21 UTC
 </div>
 </div>
 </body>
