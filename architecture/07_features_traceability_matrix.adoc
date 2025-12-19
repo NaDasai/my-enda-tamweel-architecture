@@ -10,21 +10,21 @@ This matrix traces platform features to their requirements, quality attributes, 
 |**User Authentication**: Secure login with JWT tokens and refresh token rotation, protecting user sessions with HTTP-only cookies and in-memory access tokens.
 |<<./01_introduction_and_goals/02_requirements_overview.adoc#RE7, R7 - JWT Auth>>
 |<<./01_introduction_and_goals/03_quality_goals.adoc#Q1, Q1 - Security>>
-|<<./04_architecture_decisions/adr-003-authentication-strategy.adoc#, ADR-003 Auth Strategy>>
+|Auth Strategy
 |<<./06_risks_and_tech_debt/02_technical_debts.adoc#TD7, TD7 - Mobile Token Storage>>
 
 |F2
 |**User Registration**: New client onboarding with automatic Hedera wallet creation and secure key storage.
 |<<./01_introduction_and_goals/02_requirements_overview.adoc#RE1, R1 - Wallet Creation>>
 |<<./01_introduction_and_goals/03_quality_goals.adoc#Q1, Q1 - Security>>, <<./01_introduction_and_goals/03_quality_goals.adoc#Q6, Q6 - Maintainability>>
-|<<./04_architecture_decisions/adr-004-custodial-wallet.adoc#, ADR-004 Custodial Wallet>>
+|Custodial Wallet
 |<<./06_risks_and_tech_debt/01_risks.adoc#RI2, R2 - Key Compromise>>
 
 |F3
 |**Daily Points Calculation**: Automated daily extraction from Middle DB and rule-based points calculation.
 |<<./01_introduction_and_goals/02_requirements_overview.adoc#RE2, R2 - Daily Extraction>>, <<./01_introduction_and_goals/02_requirements_overview.adoc#RE3, R3 - Points Engine>>
 |<<./01_introduction_and_goals/03_quality_goals.adoc#Q2, Q2 - Reliability>>, <<./01_introduction_and_goals/03_quality_goals.adoc#Q4, Q4 - Scalability>>
-|<<./04_architecture_decisions/adr-005-batch-processing.adoc#, ADR-005 Batch Processing>>
+|Batch Processing
 |<<./06_risks_and_tech_debt/01_risks.adoc#RI3, R3 - Middle DB Integration>>, <<./06_risks_and_tech_debt/02_technical_debts.adoc#TD3, TD3 - Hardcoded Rules>>
 
 |F4
@@ -45,7 +45,7 @@ This matrix traces platform features to their requirements, quality attributes, 
 |**Admin Management**: Super Admin panel for Admin account lifecycle management.
 |<<./01_introduction_and_goals/02_requirements_overview.adoc#RE6, R6 - Super Admin Panel>>
 |<<./01_introduction_and_goals/03_quality_goals.adoc#Q1, Q1 - Security>>, <<./01_introduction_and_goals/03_quality_goals.adoc#Q7, Q7 - Auditability>>
-|<<./04_architecture_decisions/adr-003-authentication-strategy.adoc#, ADR-003 Auth Strategy>>
+|Auth Strategy
 |N/A
 
 |F7
