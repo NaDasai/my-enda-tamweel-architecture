@@ -439,7 +439,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1>Enda Tamweel HTS-Based Loyalty Tokenization Platform: Architecture Overview</h1>
 <div class="details">
 <span id="revnumber">version 1.0,</span>
-<span id="revdate">2025-12-19</span>
+<span id="revdate">2025-12-23</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -474,41 +474,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_data_protection_and_privacy">3.5. Data Protection and Privacy</a></li>
 </ul>
 </li>
-<li><a href="#_architecture_decisions">4. Architecture Decisions</a></li>
-<li><a href="#_quality_assurance_testing_strategy">Quality Assurance Testing Strategy</a>
-<ul class="sectlevel1">
-<li><a href="#_testing_scope">5. Testing Scope</a>
+<li><a href="#_architecture_decisions">4. Architecture Decisions</a>
 <ul class="sectlevel2">
-<li><a href="#_test_platform">5.1. Test Platform</a></li>
-<li><a href="#_test_types">5.2. Test Types</a></li>
-<li><a href="#_product">5.3. Product</a></li>
+<li><a href="#_adr_001_use_hedera_token_service_hts_for_loyalty_points_tokenization">4.1. ADR 001: Use Hedera Token Service (HTS) for Loyalty Points Tokenization</a></li>
 </ul>
 </li>
-<li><a href="#_testing_levels">6. Testing Levels</a>
+<li><a href="#_quality_assurance_testing_strategy">5. Quality Assurance Testing Strategy</a>
 <ul class="sectlevel2">
-<li><a href="#_unit_testing">6.1. Unit Testing</a></li>
-<li><a href="#_integration_testing">6.2. Integration Testing</a></li>
-<li><a href="#_end_to_end_e2e_testing">6.3. End-to-End (E2E) Testing</a></li>
-<li><a href="#_api_contract_testing">6.4. API Contract Testing</a></li>
-<li><a href="#_security_testing">6.5. Security Testing</a></li>
-<li><a href="#_test_environment_strategy">6.6. Test Environment Strategy</a></li>
+<li><a href="#_testing_scope">5.1. Testing Scope</a></li>
+<li><a href="#_testing_levels">5.2. Testing Levels</a></li>
+<li><a href="#_testing_strategy">5.3. Testing Strategy</a></li>
 </ul>
 </li>
-<li><a href="#_testing_strategy">7. Testing Strategy</a></li>
-</ul>
-</li>
-<li><a href="#_risk_technical_debt">Risk &amp; Technical Debt</a>
-<ul class="sectlevel1">
-<li><a href="#_risks">8. Risks</a>
+<li><a href="#_risk_technical_debt">6. Risk &amp; Technical Debt</a>
 <ul class="sectlevel2">
-<li><a href="#_risk_matrix">8.1. Risk Matrix</a></li>
-<li><a href="#_risk_monitoring">8.2. Risk Monitoring</a></li>
+<li><a href="#_risks">6.1. Risks</a></li>
+<li><a href="#_technical_debt">6.2. Technical Debt</a></li>
 </ul>
 </li>
-<li><a href="#_technical_debt">9. Technical Debt</a></li>
-</ul>
-</li>
-<li><a href="#_features_traceability_matrix_rtm">Features Traceability Matrix (RTM)</a></li>
+<li><a href="#_features_traceability_matrix_rtm">7. Features Traceability Matrix (RTM)</a></li>
 </ul>
 </div>
 </div>
@@ -1552,7 +1536,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h4 id="_infrastructure_overview">2.8.1. Infrastructure Overview</h4>
 <div class="imageblock">
 <div class="content">
-<img src="diag-plantuml-md5-59567d006dbff485e194b98aba75c727.png" alt="Diagram" width="1320" height="1183">
+<img src="diag-plantuml-md5-f4dbc5f969eff02db15c3a084653ebc0.png" alt="Diagram" width="1320" height="1183">
 </div>
 </div>
 </div>
@@ -2036,7 +2020,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </li>
 <li>
-<p><strong>Refresh Token Hashing</strong>: Refresh tokens are hashed (bcrypt) before storage in the database. Even if the database is compromised, tokens cannot be used directly.</p>
+<p><strong>Refresh Token Hashing</strong>: Refresh tokens are hashed before storage in the database. Even if the database is compromised, tokens cannot be used directly.</p>
 </li>
 </ul>
 </div>
@@ -2134,9 +2118,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul>
 <li>
 <p>All external communication encrypted using <strong>TLS 1.3</strong></p>
-</li>
-<li>
-<p>HSTS (HTTP Strict Transport Security) enabled</p>
 </li>
 <li>
 <p>Certificate pinning for mobile applications</p>
@@ -2312,12 +2293,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li>
 <p>Unusual token refresh patterns</p>
-</li>
-<li>
-<p>Admin actions outside business hours</p>
-</li>
-<li>
-<p>Large token operations (burn &gt; threshold)</p>
 </li>
 <li>
 <p>Database access anomalies</p>
@@ -2974,12 +2949,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Right to Erasure</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Account deactivation with data anonymization</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Account deactivation</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">On-chain data cannot be deleted (public ledger)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Right to Data Portability</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Export endpoint provides user data in JSON format</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Right to Access Data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Endpoint provides user data</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Token balance viewable on Hedera explorer</p></td>
 </tr>
 <tr>
@@ -3124,10 +3099,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_architecture_decisions">4. Architecture Decisions</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section documents the key architecture decisions made during the design of the Enda Tamweel Loyalty Platform.
-:leveloffset: +1
-= ADR 001: Use Hedera Token Service (HTS) for Loyalty Points Tokenization</p>
+<p>This section documents the key architecture decisions made during the design of the Enda Tamweel Loyalty Platform.</p>
 </div>
+<div class="sect2">
+<h3 id="_adr_001_use_hedera_token_service_hts_for_loyalty_points_tokenization">4.1. ADR 001: Use Hedera Token Service (HTS) for Loyalty Points Tokenization</h3>
 <div class="paragraph">
 <p><strong>Status</strong>: Proposed</p>
 </div>
@@ -3195,7 +3170,7 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 <p><strong>Compliance</strong>: Transaction fees in USD-equivalent, easy for accounting</p>
 </li>
 <li>
-<p><strong>SDK Support</strong>: Official JavaScript SDK integrates well with SpringBoot backend</p>
+<p><strong>SDK Support</strong>: Official Java SDK integrates well with SpringBoot backend</p>
 </li>
 </ul>
 </div>
@@ -3239,10 +3214,12 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 </div>
 </div>
 </div>
-<h1 id="_quality_assurance_testing_strategy" class="sect0">Quality Assurance Testing Strategy</h1>
+</div>
 <div class="sect1">
-<h2 id="_testing_scope">5. Testing Scope</h2>
+<h2 id="_quality_assurance_testing_strategy">5. Quality Assurance Testing Strategy</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_testing_scope">5.1. Testing Scope</h3>
 <div class="paragraph">
 <p>The testing team will execute validation of the changes that include but not limited to the following activities:</p>
 </div>
@@ -3259,8 +3236,8 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 </li>
 </ul>
 </div>
-<div class="sect2">
-<h3 id="_test_platform">5.1. Test Platform</h3>
+<div class="sect3">
+<h4 id="_test_platform">5.1.1. Test Platform</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -3272,8 +3249,8 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_test_types">5.2. Test Types</h3>
+<div class="sect3">
+<h4 id="_test_types">5.1.2. Test Types</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -3288,8 +3265,8 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_product">5.3. Product</h3>
+<div class="sect3">
+<h4 id="_product">5.1.3. Product</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -3299,23 +3276,21 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_testing_levels">6. Testing Levels</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_testing_levels">5.2. Testing Levels</h3>
 <div class="paragraph">
 <p>This section describes the different levels of testing implemented for the Enda Tamweel Loyalty Platform.</p>
 </div>
-<div class="sect2">
-<h3 id="_unit_testing">6.1. Unit Testing</h3>
 <div class="sect3">
-<h4 id="_scope">6.1.1. Scope</h4>
+<h4 id="_unit_testing">5.2.1. Unit Testing</h4>
+<div class="sect4">
+<h5 id="_scope">Scope</h5>
 <div class="paragraph">
 <p>Individual functions, methods, and classes in isolation.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_unit_test_examples">6.1.2. Unit Test Examples</h4>
+<div class="sect4">
+<h5 id="_unit_test_examples">Unit Test Examples</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -3348,16 +3323,16 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_integration_testing">6.2. Integration Testing</h3>
 <div class="sect3">
-<h4 id="_scope_2">6.2.1. Scope</h4>
+<h4 id="_integration_testing">5.2.2. Integration Testing</h4>
+<div class="sect4">
+<h5 id="_scope_2">Scope</h5>
 <div class="paragraph">
 <p>Interaction between modules and external dependencies.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_integration_test_scenarios">6.2.2. Integration Test Scenarios</h4>
+<div class="sect4">
+<h5 id="_integration_test_scenarios">Integration Test Scenarios</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -3389,8 +3364,8 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_external_system_integration">6.2.3. External System Integration</h4>
+<div class="sect4">
+<h5 id="_external_system_integration">External System Integration</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -3429,18 +3404,18 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_end_to_end_e2e_testing">6.3. End-to-End (E2E) Testing</h3>
 <div class="sect3">
-<h4 id="_scope_3">6.3.1. Scope</h4>
+<h4 id="_end_to_end_e2e_testing">5.2.3. End-to-End (E2E) Testing</h4>
+<div class="sect4">
+<h5 id="_scope_3">Scope</h5>
 <div class="paragraph">
 <p>Complete user journeys through the entire system.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_e2e_test_scenarios">6.3.2. E2E Test Scenarios</h4>
 <div class="sect4">
-<h5 id="_client_journey">Client Journey</h5>
+<h5 id="_e2e_test_scenarios">E2E Test Scenarios</h5>
+<div class="sect5">
+<h6 id="_client_journey">Client Journey</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -3472,8 +3447,8 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 </tbody>
 </table>
 </div>
-<div class="sect4">
-<h5 id="_admin_journey">Admin Journey</h5>
+<div class="sect5">
+<h6 id="_admin_journey">Admin Journey</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -3501,8 +3476,8 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 </tbody>
 </table>
 </div>
-<div class="sect4">
-<h5 id="_super_admin_journey">Super Admin Journey</h5>
+<div class="sect5">
+<h6 id="_super_admin_journey">Super Admin Journey</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -3528,16 +3503,16 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_api_contract_testing">6.4. API Contract Testing</h3>
 <div class="sect3">
-<h4 id="_scope_4">6.4.1. Scope</h4>
+<h4 id="_api_contract_testing">5.2.4. API Contract Testing</h4>
+<div class="sect4">
+<h5 id="_scope_4">Scope</h5>
 <div class="paragraph">
 <p>Validate API contracts and backward compatibility.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_api_tests">6.4.2. API Tests</h4>
+<div class="sect4">
+<h5 id="_api_tests">API Tests</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -3576,10 +3551,10 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_security_testing">6.5. Security Testing</h3>
 <div class="sect3">
-<h4 id="_tools">6.5.1. Tools</h4>
+<h4 id="_security_testing">5.2.5. Security Testing</h4>
+<div class="sect4">
+<h5 id="_tools">Tools</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -3591,8 +3566,8 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_security_test_areas">6.5.2. Security Test Areas</h4>
+<div class="sect4">
+<h5 id="_security_test_areas">Security Test Areas</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -3629,8 +3604,8 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_test_environment_strategy">6.6. Test Environment Strategy</h3>
+<div class="sect3">
+<h4 id="_test_environment_strategy">5.2.6. Test Environment Strategy</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3675,10 +3650,8 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 </table>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_testing_strategy">7. Testing Strategy</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_testing_strategy">5.3. Testing Strategy</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -3724,10 +3697,12 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 </table>
 </div>
 </div>
-<h1 id="_risk_technical_debt" class="sect0">Risk &amp; Technical Debt</h1>
+</div>
 <div class="sect1">
-<h2 id="_risks">8. Risks</h2>
+<h2 id="_risk_technical_debt">6. Risk &amp; Technical Debt</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_risks">6.1. Risks</h3>
 <div class="paragraph">
 <p>The following risks represent potential future uncertainties that may impact the Enda Tamweel Loyalty Platform if not addressed:</p>
 </div>
@@ -3795,14 +3770,14 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="RI7"></a>R7</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HBAR price volatility affects operational costs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Budget buffer for fee fluctuations; batch operations to minimize transactions; monitor daily costs; alert on budget threshold</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Budget buffer for fee fluctuations; batch operations to minimize transactions</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Monitoring in place</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="RI8"></a>R8</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Data breach exposing user personal information or encrypted keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Encryption at rest and in transit; WAF and DDoS protection; incident response plan; regular penetration testing</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Encryption at rest and in transit; WAF and DDoS protection; incident response plan</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Security measures active</p></td>
 </tr>
 <tr>
@@ -3821,8 +3796,8 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 </tr>
 </tbody>
 </table>
-<div class="sect2">
-<h3 id="_risk_matrix">8.1. Risk Matrix</h3>
+<div class="sect3">
+<h4 id="_risk_matrix">6.1.1. Risk Matrix</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -3860,10 +3835,10 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 </tbody>
 </table>
 </div>
-<div class="sect2">
-<h3 id="_risk_monitoring">8.2. Risk Monitoring</h3>
 <div class="sect3">
-<h4 id="_automated_monitoring">8.2.1. Automated Monitoring</h4>
+<h4 id="_risk_monitoring">6.1.2. Risk Monitoring</h4>
+<div class="sect4">
+<h5 id="_automated_monitoring">Automated Monitoring</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -3875,18 +3850,13 @@ We will use <strong>Hedera Token Service (HTS)</strong> for tokenizing loyalty p
 <li>
 <p>Security vulnerability scanning</p>
 </li>
-<li>
-<p>Cost tracking and budget alerts</p>
-</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_technical_debt">9. Technical Debt</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_technical_debt">6.2. Technical Debt</h3>
 <div class="paragraph">
 <p>The following technical debt items represent known deficiencies in the current system implementation.
 They are acknowledged and planned for future resolution:</p>
@@ -3922,7 +3892,7 @@ They are acknowledged and planned for future resolution:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="TD3"></a>TD3</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Points calculation rules hardcoded in service; no admin interface for rule management</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Points calculation rules</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Implement rule engine with database-driven configuration; add admin UI for rule management</p></td>
 </tr>
 <tr>
@@ -3946,7 +3916,7 @@ They are acknowledged and planned for future resolution:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="TD7"></a>TD7</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Mobile app stores JWT access token in secure storage instead of memory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mobile app stores JWT access token in memory</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Refactor mobile auth to use memory-only storage with background refresh</p></td>
 </tr>
 <tr>
@@ -3971,9 +3941,10 @@ They are acknowledged and planned for future resolution:</p>
 </table>
 </div>
 </div>
-<h1 id="_features_traceability_matrix_rtm" class="sect0">Features Traceability Matrix (RTM)</h1>
-<div class="openblock partintro">
-<div class="content">
+</div>
+<div class="sect1">
+<h2 id="_features_traceability_matrix_rtm">7. Features Traceability Matrix (RTM)</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>This matrix traces platform features to their requirements, quality attributes, architecture decisions, and identified risks.</p>
 </div>
@@ -4085,7 +4056,7 @@ They are acknowledged and planned for future resolution:</p>
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2025-12-19 15:23:46 UTC
+Last updated 2025-12-23 15:25:05 UTC
 </div>
 </div>
 </body>
