@@ -31,7 +31,7 @@ The platform implements a dual-token authentication strategy to balance security
   3. New refresh token and access token issued
   4. New refresh token sent as HTTP-only cookie
 
-* **Refresh Token Hashing**: Refresh tokens are hashed (bcrypt) before storage in the database. Even if the database is compromised, tokens cannot be used directly.
+* **Refresh Token Hashing**: Refresh tokens are hashed before storage in the database. Even if the database is compromised, tokens cannot be used directly.
 
 === Session Management
 
@@ -110,7 +110,6 @@ Client Hedera private keys require special security handling:
 === Transport Security
 
 * All external communication encrypted using **TLS 1.3**
-* HSTS (HTTP Strict Transport Security) enabled
 * Certificate pinning for mobile applications
 * Internal service-to-service communication within Kubernetes uses mTLS
 
@@ -192,8 +191,6 @@ Automated alerts for:
 
 * Multiple failed login attempts
 * Unusual token refresh patterns
-* Admin actions outside business hours
-* Large token operations (burn > threshold)
 * Database access anomalies
 
 == Cookie Security Settings

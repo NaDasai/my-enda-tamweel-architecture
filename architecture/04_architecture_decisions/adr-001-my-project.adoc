@@ -28,7 +28,7 @@ Rationale:
 * **Enterprise Grade**: Governed by major enterprises, suitable for financial applications
 * **Built-in Controls**: Native support for minting, burning, and admin keys
 * **Compliance**: Transaction fees in USD-equivalent, easy for accounting
-* **SDK Support**: Official JavaScript SDK integrates well with SpringBoot backend
+* **SDK Support**: Official Java SDK integrates well with SpringBoot backend
 
 *Consequences*:
 

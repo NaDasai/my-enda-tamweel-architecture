@@ -13,8 +13,8 @@ LAYOUT_WITH_LEGEND()
 
 title Deployment Diagram - Enda Tamweel Loyalty Platform
 
-Deployment_Node(cloud, "Cloud Infrastructure", "AWS/Azure/GCP") {
-    Deployment_Node(cdn, "CDN", "CloudFront/Azure CDN") {
+Deployment_Node(cloud, "Infrastructure", "In premises") {
+    Deployment_Node(cdn, "CDN", "Edge Location CDN") {
         Container(webAssets, "Web Assets", "Static files", "React build artifacts")
     }
     

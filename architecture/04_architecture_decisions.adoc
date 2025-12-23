@@ -1,3 +1,4 @@
 = Architecture Decisions
 
 This section documents the key architecture decisions made during the design of the Enda Tamweel Loyalty Platform.
+

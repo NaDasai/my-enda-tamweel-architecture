@@ -165,11 +165,11 @@ The platform ensures privacy by:
 |Historical transaction data immutable
 
 |Right to Erasure
-|Account deactivation with data anonymization
+|Account deactivation
 |On-chain data cannot be deleted (public ledger)
 
-|Right to Data Portability
-|Export endpoint provides user data in JSON format
+|Right to Access Data
+|Endpoint provides user data
 |Token balance viewable on Hedera explorer
 
 |Right to Restriction

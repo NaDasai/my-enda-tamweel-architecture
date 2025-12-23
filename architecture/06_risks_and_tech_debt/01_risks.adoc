@@ -45,13 +45,13 @@ The following risks represent potential future uncertainties that may impact the
 |[[RI7]]R7
 |Medium
 |HBAR price volatility affects operational costs
-|Budget buffer for fee fluctuations; batch operations to minimize transactions; monitor daily costs; alert on budget threshold
+|Budget buffer for fee fluctuations; batch operations to minimize transactions
 |Monitoring in place
 
 |[[RI8]]R8
 |High
 |Data breach exposing user personal information or encrypted keys
-|Encryption at rest and in transit; WAF and DDoS protection; incident response plan; regular penetration testing
+|Encryption at rest and in transit; WAF and DDoS protection; incident response plan
 |Security measures active
 
 |[[RI9]]R9
@@ -96,4 +96,3 @@ The following risks represent potential future uncertainties that may impact the
 * Hedera network status integration
 * Database reconciliation alerts
 * Security vulnerability scanning
-* Cost tracking and budget alerts

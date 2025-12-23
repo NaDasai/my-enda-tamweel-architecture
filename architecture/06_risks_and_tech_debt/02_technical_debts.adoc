@@ -19,7 +19,7 @@ They are acknowledged and planned for future resolution:
 
 |[[TD3]]TD3
 |Medium
-|Points calculation rules hardcoded in service; no admin interface for rule management
+|Points calculation rules 
 |Implement rule engine with database-driven configuration; add admin UI for rule management
 
 |[[TD4]]TD4
@@ -39,7 +39,7 @@ They are acknowledged and planned for future resolution:
 
 |[[TD7]]TD7
 |Medium
-|Mobile app stores JWT access token in secure storage instead of memory
+|Mobile app stores JWT access token in memory
 |Refactor mobile auth to use memory-only storage with background refresh
 
 |[[TD8]]TD8
